@@ -3,32 +3,25 @@ export type Theme = typeof themes[number]
 
 export const useThemeStore = defineStore('theme', () => {
   const cm = useColorMode()
-  const currentTheme = computed(() => cm.preference)
+  const current = computed(() => cm.preference)
 
-  function isValidTheme(s: string): s is Theme {
+  function isValid(s: string): s is Theme {
     return themes.includes(s as Theme)
   }
 
-  function setTheme(theme: Theme) {
+  function set(theme: Theme) {
     cm.preference = theme
   }
 
-  function toggleTheme(): void {
-    const curr = currentTheme.value
-    if (curr === 'system') {
-      setTheme('light')
-      return
-    }
+  function toggle(): void {
+    const curr = current.value
 
-    setTheme(curr === 'dark' ? 'light' : 'dark')
+    if (curr === 'system')
+      set('light')
+    else set(curr === 'dark' ? 'light' : 'dark')
   }
 
-  return {
-    isValidTheme,
-    setTheme,
-    toggleTheme,
-    currentTheme,
-  }
+  return { isValid, set, toggle, current }
 })
 
 if (import.meta.hot)
