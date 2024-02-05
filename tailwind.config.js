@@ -13,6 +13,9 @@ module.exports = {
         '2xl': '1400px',
       },
     },
+    height: {
+      header: 'var(--header-height)',
+    },
     extend: {
       colors: {
         border: 'hsl(var(--border))',
