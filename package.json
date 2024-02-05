@@ -12,7 +12,13 @@
     "format": "eslint . --fix"
   },
   "dependencies": {
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.1.0",
+    "lucide-vue-next": "^0.322.0",
     "nuxt": "^3.10.0",
+    "radix-vue": "^1.4.1",
+    "tailwind-merge": "^2.2.1",
+    "tailwindcss-animate": "^1.0.7",
     "vue": "^3.4.15",
     "vue-router": "^4.2.5"
   },
@@ -22,6 +28,7 @@
     "@nuxtjs/eslint-module": "^4.1.0",
     "@nuxtjs/tailwindcss": "^6.11.3",
     "eslint": "^8.56.0",
-    "eslint-plugin-format": "^0.1.0"
+    "eslint-plugin-format": "^0.1.0",
+    "shadcn-nuxt": "^0.9.0"
   }
 }

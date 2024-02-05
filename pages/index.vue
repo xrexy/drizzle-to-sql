@@ -1,3 +1,5 @@
 <template>
-  <h1>cock</h1>
+  <div>
+    <Button>Test</Button>
+  </div>
 </template>
