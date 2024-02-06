@@ -1,4 +1,6 @@
 <script lang='ts' setup>
+import type * as Monaco from 'monaco-editor'
+
 import { shikijiToMonaco } from 'shikiji-monaco'
 
 const value = ref(`type Test = { value: string }
@@ -18,20 +20,32 @@ watch(() => editorRef.value, async (element) => {
   if (!element || !monaco)
     return
 
+  const editor = monaco.editor
+
   const shikiji = await getShikiji()
   shikijiToMonaco(shikiji, monaco!)
 
-  watch(editorTheme, () => {
-    monaco!.editor.setTheme(editorTheme.value)
-  }, {
+  watch(editorTheme, () => editor.setTheme(editorTheme.value), {
     immediate: true,
   })
 })
+
+const options: Monaco.editor.IStandaloneEditorConstructionOptions = {
+  minimap: { enabled: false },
+  fontFamily: 'DM Mono, monospace',
+  glyphMargin: false,
+  fontSize: 14,
+  lineDecorationsWidth: 10,
+  lineNumbersMinChars: 3,
+  fixedOverflowWidgets: true,
+  padding: { top: 4 },
+  overviewRulerLanes: 0,
+}
 </script>
 
 <template>
-  <div class="grid grid-cols-2 h-[calc(100vh-var(--header-height))] overflow-hidden">
-    <MonacoEditor ref="editorRef" v-model="value" lang="typescript" />
+  <div class="grid grid-cols-2 h-[calc(100vh-var(--header-height))]">
+    <MonacoEditor ref="editorRef" v-model="value" :options="options" lang="typescript" />
     <div class="h-full w-full bg-red-400">
       <h1>uwu</h1>
     </div>

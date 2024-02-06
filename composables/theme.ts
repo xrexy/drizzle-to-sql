@@ -3,7 +3,7 @@ export type Theme = typeof themes[number]
 
 export const useThemeStore = defineStore('theme', () => {
   const cm = useColorMode()
-  const current = computed(() => cm.preference)
+  const current = computed(() => cm.value)
 
   function isValid(s: string): s is Theme {
     return themes.includes(s as Theme)
@@ -14,11 +14,7 @@ export const useThemeStore = defineStore('theme', () => {
   }
 
   function toggle(): void {
-    const curr = current.value
-
-    if (curr === 'system')
-      set('light')
-    else set(curr === 'dark' ? 'light' : 'dark')
+    cm.preference = cm.value === 'dark' ? 'light' : 'dark'
   }
 
   return { isValid, set, toggle, current }
